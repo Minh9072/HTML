@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_room.css">
+    <title>Smart Home Website</title>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo"><i class="fa-solid fa-seedling"></i> Smart life</a>
+
+        <!-- Nút menu toggle -->
+        <div class="menu-toggle" id="menu-toggle">
+            <i class="fa-solid fa-bars"></i> <!-- icon ☰ -->
+        </div>
+        <nav id="nav-menu">
+            <a href="index.html" ><i class="fa-solid fa-house"></i> Home</a>
+            <a href="living_room_page.html"><i class="fa-solid fa-couch"></i> Living Room</a>
+            <a href="bed_room_page.html" ><i class="fa-solid fa-moon"></i> Bedroom</a>
+            <a href="kitchen_page.html" class="active" ><i class="fa-solid fa-utensils"></i> Kitchen</a>
+            <a href="contact_page.html" ><i class="fa-solid fa-address-book"></i> Contact</a>
+        </nav>
+    </header>
+    <section class="room-container">
+        <div>
+            <h1>Kitchen</h1>
+            <p class="room-description">Modern kitchen with island and appliances</p>
+            
+            <div class="room-grid">
+                <!-- Cột bên trái -->
+                <div class="left-column">
+                    <!-- Room Conditions Card -->
+                    <div class="room-card">
+                        <h2>Room Conditions</h2>
+                        <div class="condition-item">
+                            <i class="fas fa-temperature-high"></i>
+                            <span>Temperature</span>
+                            <span class="value">26°C</span>
+                        </div>
+                        <div class="condition-item">
+                            <i class="fas fa-droplet"></i>
+                            <span>&nbsp;Humidity</span>
+                            <span class="value">62%</span>
+                        </div>
+                        <div class="condition-item">
+                            <i class="fas fa-wind"></i>
+                            <span>Air quality</span>
+                            <span class="value">good</span>
+                        </div>
+                        <div class="condition-item">
+                            <i class="fas fa-fire"></i>
+                            <span>Gas</span>
+                            <span class="value">save</span>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Cột bên phải -->
+                <div class="right-column">
+                    <!-- Main Light Card -->
+                    <div class="room-card">
+                        <div class="device-header">
+                            <i class="fas fa-lightbulb"></i>
+                            <h2>Main Light</h2>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <input type="range" min="0" max="100" value="50" class="main-light-slider">  
+                        <div class="main-light-controls">
+                            <p>Brightness: </p>
+                            <p class="brightness-label">medium</p> 
+                        </div>
+                    </div>
+
+                     <!-- Smart Refrigerator Card -->
+                     <div class="room-card">
+                        <div class="device-header">
+                            <i class="fas fa-window-maximize"></i>
+                            <h2>Smart Refrigerator</h2>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="main-light-controls">
+                            <p>Auto: </p>
+                            <p class="brightness-label">active</p> 
+                        </div>
+                    </div>
+
+                    <!-- Coffee Maker Card -->
+                    <div class="room-card">
+                        <div class="device-header">
+                            <i class="fas fa-mug-hot"></i>
+                            <h2>Coffee Maker</h2>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="main-light-controls">
+                            <p>Auto: </p>
+                            <p class="brightness-label">not active</p> 
+                        </div>
+                    </div>
+            
+                    <!-- Smart TV Card -->
+                    <div class="room-card">
+                        <div class="device-header">
+                            <i class="fas fa-tv"></i>
+                            <h2>Smart TV</h2>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <input type="range" min="0" max="100" value="50" class="TV-slider">  
+                        <div class="TV-controls">
+                            <p>Volume: </p>
+                            <p class="volume-label">medium</p>           
+                        </div>
+                        <p>Input: HDMI 1</p>
+                    </div>
+            
+                    <!-- Air Conditioner Card -->
+                    <div class="room-card">
+                        <div class="device-header">
+                            <i class="fas fa-snowflake"></i>
+                            <h2>Air Conditioner</h2>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <input type="range" min="16" max="31" value="22" class="AC-slider"> 
+                        <div class="AC-controls">
+                            <p>Temperature: </p>
+                            <p class="temp-label">medium</p>        
+                        </div>
+                    </div>
+            
+                    <!-- Ceiling Fan Card -->
+                    <div class="room-card">
+                        <div class="device-header">
+                            <i class="fas fa-fan"></i>
+                            <h2>Ceiling Fan</h2>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div><input type="range" min="0" max="100" value="50" class="fan-slider"></div>
+                        <div class="fan-controls">
+                            <p>Fan Speed: </p>
+                            <p class="speed-label">medium</p>                                   
+                        </div>                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        const toggleBtn = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+      
+        toggleBtn.addEventListener('click', () => {
+          navMenu.classList.toggle('active');
+        });
+
+        function updatePercentLabel(value, text) {
+            let label = '';
+
+            if (value ==0){
+            label = 'off'
+            } else if (value < 35) {
+            label = 'low';
+            } else if (value <= 70) {
+            label = 'medium';
+            } else {
+            label = 'high';
+            }
+
+            text.textContent = `${label} ${value}%`;
+        }
+        function updateTempLabel(value, text) {
+            let label = '';
+
+            if (value < 20) {
+            label = 'low';
+            } else if (value <= 28) {
+            label = 'medium';
+            } else {
+            label = 'high';
+            }
+
+            text.textContent = `${label} ${value}°C`;
+        }
+        const main_light_slider = document.querySelector('.main-light-slider');
+        const brightnessLabel = document.querySelector('.brightness-label');
+        const TV_slider = document.querySelector('.TV-slider');
+        const volume_Label = document.querySelector('.volume-label');
+        const AC_slider = document.querySelector('.AC-slider');
+        const temp_Label = document.querySelector('.temp-label');
+        const fan_slider = document.querySelector('.fan-slider');
+        const speed_Label = document.querySelector('.speed-label');
+        
+        updatePercentLabel(main_light_slider.value, brightnessLabel);
+        main_light_slider.addEventListener('input', () => {
+            updatePercentLabel(main_light_slider.value, brightnessLabel);
+        });
+
+        updatePercentLabel(TV_slider.value, volume_Label);
+        TV_slider.addEventListener('input', () => {
+            updatePercentLabel(TV_slider.value, volume_Label);
+        });
+
+        updateTempLabel(AC_slider.value, temp_Label);
+        AC_slider.addEventListener('input', () => {
+            updateTempLabel(AC_slider.value, temp_Label);
+        });
+
+        updatePercentLabel(fan_slider.value, speed_Label);
+        fan_slider.addEventListener('input', () => {
+            updatePercentLabel(fan_slider.value, speed_Label);
+        });
+    </script>
+</body>
+</html>
