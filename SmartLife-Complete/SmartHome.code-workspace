@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../SmartHome"
+		},
+		{
+			"path": "D:/HTML"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "SmartLife"
+	}
+}

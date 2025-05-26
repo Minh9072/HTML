@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_room.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Smart Home Website</title>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo"><i class="fa-solid fa-seedling"></i> Smart life</a>
+
+        <!-- Nút menu toggle -->
+        <div class="menu-toggle" id="menu-toggle">
+            <i class="fa-solid fa-bars"></i> <!-- icon ☰ -->
+        </div>
+        <nav id="nav-menu">
+            <a href="index.html" ><i class="fa-solid fa-house"></i> Home</a>
+            <a href="living_room_page.html"><i class="fa-solid fa-couch"></i> Living Room</a>
+            <a href="bed_room_page.html" ><i class="fa-solid fa-moon"></i> Bedroom</a>
+            <a href="kitchen_page.html" class="active" ><i class="fa-solid fa-utensils"></i> Kitchen</a>
+            <a href="contact_page.html" ><i class="fa-solid fa-address-book"></i> Contact</a>
+        </nav>
+    </header>
+    <section class="room-container">
+        <div>
+            <h1>Kitchen</h1>
+            <p class="room-description">Modern kitchen with island and appliances</p>
+            
+            <div class="room-grid">
+                <!-- Cột bên trái -->
+                <div class="left-column">
+                    <!-- Room Conditions Card -->
+                    <div class="room-card">
+                        <h2>Room Conditions</h2>
+                        <div class="condition-item">
+                            <i class="fas fa-temperature-high"></i>
+                            <span>Temperature</span>
+                            <span class="value" id = "temperature"></span>
+                        </div>
+                        <div class="condition-item">
+                            <i class="fas fa-droplet"></i>
+                            <span>&nbsp;Humidity</span>
+                            <span class="value" id = "humidity"></span>
+                        </div>
+                        <div class="condition-item">
+                            <i class="fas fa-wind"></i>
+                            <span>Air quality</span>
+                            <span class="value" id = "air_quality"></span>
+                        </div>
+                        <div class="condition-item">
+                            <i class="fas fa-fire"></i>
+                            <span>Gas</span>
+                            <span class="value" id = "gas"></span>
+                        </div>
+                        <canvas id="roomChart" width="400" height="300"></canvas>
+                    </div>
+                </div>
+            
+                <!-- Cột bên phải -->
+                <div class="right-column">
+                    <!-- Main Light Card -->
+                    <div class="room-card">
+                        <div class="device-header">
+                            <i class="fas fa-lightbulb"></i>
+                            <h2>Main Light</h2>
+                            <label class="switch">
+                                <input type="checkbox" onclick="setMainlight(this.checked ? 'ON' : 'OFF')">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <input type="range" min="0" max="100" value="50" class="main-light-slider">  
+                        <div class="main-light-controls">
+                            <p>Brightness: </p>
+                            <p class="brightness-label">medium</p> 
+                        </div>
+                    </div>
+
+                     <!-- Smart Refrigerator Card -->
+                     <div class="room-card">
+                        <div class="device-header">
+                            <i class="fas fa-window-maximize"></i>
+                            <h2>Smart Refrigerator</h2>
+                            <label class="switch">
+                                <input type="checkbox" onclick="setFridge(this.checked ? 'ON' : 'OFF')">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="main-light-controls">
+                            <p>Auto: </p>
+                            <p class="fridge-label"> not active</p> 
+                        </div>
+                    </div>
+
+                    <!-- Coffee Maker Card -->
+                    <div class="room-card">
+                        <div class="device-header">
+                            <i class="fas fa-mug-hot"></i>
+                            <h2>Coffee Maker</h2>
+                            <label class="switch">
+                                <input type="checkbox" onclick="setCoffee(this.checked ? 'ON' : 'OFF')">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="main-light-controls">
+                            <p>Auto: </p>
+                            <p class="coffee-label">not active</p> 
+                        </div>
+                    </div>
+            
+                    <!-- Smart TV Card -->
+                    <div class="room-card">
+                        <div class="device-header">
+                            <i class="fas fa-tv"></i>
+                            <h2>Smart TV</h2>
+                            <label class="switch">
+                                <input type="checkbox" onclick="setTV(this.checked ? 'ON' : 'OFF')">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <input type="range" min="0" max="100" value="50" class="TV-slider">  
+                        <div class="TV-controls">
+                            <p>Volume: </p>
+                            <p class="volume-label">medium</p>           
+                        </div>
+                        <div class="HDMI-controls">
+                            <p>Input: </p>
+                            <p id= "HDMI-label-1" class="HDMI-label">HDMI 1</p>
+                            <p id= "HDMI-label-2" class="HDMI-label">HDMI 2</p>
+                            <p id= "HDMI-label-3" class="HDMI-label">HDMI 3</p>
+                            <p id= "HDMI-label-4" class="HDMI-label">HDMI 4</p>
+                        </div>
+                    </div>
+            
+                    <!-- Air Conditioner Card -->
+                    <!--<div class="room-card">
+                        <div class="device-header">
+                            <i class="fas fa-snowflake"></i>
+                            <h2>Air Conditioner</h2>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <input type="range" min="16" max="31" value="22" class="AC-slider"> 
+                        <div class="AC-controls">
+                            <p>Temperature: </p>
+                            <p class="temp-label">medium</p>        
+                        </div>
+                    </div>-->
+            
+                    <!-- Ceiling Fan Card -->
+                    <div class="room-card">
+                        <div class="device-header">
+                            <i class="fas fa-fan"></i>
+                            <h2>Ceiling Fan</h2>
+                            <label class="switch">
+                                <input type="checkbox" onclick="setFan(this.checked ? 'ON' : 'OFF')">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div><input type="range" min="0" max="100" value="50" class="fan-slider"></div>
+                        <div class="fan-controls">
+                            <p>Fan Speed: </p>
+                            <p class="speed-label">medium</p>                                   
+                        </div>                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyDCJ4Ddcn8i-KkmJE0dY-MCcAw4h69PBkA",
+            authDomain: "baocao-21d86.firebaseapp.com",
+            databaseURL: "https://baocao-21d86-default-rtdb.firebaseio.com",
+            projectId: "baocao-21d86",
+            storageBucket: "baocao-21d86.firebasestorage.app",
+            messagingSenderId: "132287005549",
+            appId: "1:132287005549:web:3c9782b1b59164afe25064",
+            measurementId: "G-KL7N48FWPL"
+        };
+        firebase.initializeApp(firebaseConfig);
+        var database = firebase.database();
+        firebase.analytics();
+
+        var nhietDo = document.getElementById('temperature');
+        var doAm = document.getElementById('humidity');
+        var dbRef3 = document.getElementById('gas');
+        var dbRef4 = document.getElementById('air_quality');
+
+        var dbRef1 = firebase.database().ref().child('/Kitchen/temperature');
+        var dbRef2 = firebase.database().ref().child('/Kitchen/humidity');
+        var gasRef = firebase.database().ref().child('/Kitchen/gas');
+        var airQualityRef = firebase.database().ref().child('/Kitchen/air_quality');
+
+        dbRef1.on('value', snap => nhietDo.innerText = snap.val()+"°C");
+        dbRef2.on('value', snap => doAm.innerText = snap.val()+"%");
+
+        gasRef.on('value', snap => {
+            let gasValue = snap.val(); 
+            if (gasValue < 0.5) {
+                dbRef3.innerText = 'SAFE'; 
+            } if (gasValue > 0.5) {
+                dbRef3.innerText = 'DANGER'; 
+            } if (gasValue == 0.5) {
+                dbRef3.innerText = 'WARNING';
+            }
+        });
+
+        airQualityRef.on('value', snap => {
+            let doAmValue = snap.val(); 
+            if (doAmValue < 50) {
+                dbRef4.innerText = 'GOOD'; 
+            } if (doAmValue > 50) {
+                dbRef4.innerText = 'BAD'; 
+            } if (doAmValue == 50) {
+                dbRef4.innerText = 'MEDIUM';
+            }
+        });
+
+        function setMainlight(state) {
+            var lightRef = database.ref().child("/Kitchen/main-light/state");
+            lightRef.set(state)
+        }
+        window.setMainlight = setMainlight;
+        function setTV(state) {
+            var tvRef = database.ref().child("/Kitchen/smartTV/state");
+            tvRef.set(state)
+
+            const labels = document.querySelectorAll('.HDMI-label');
+            if (state === "ON") {
+                labels.forEach(btn => {
+                    btn.classList.remove("disabled");
+                });
+            } else {
+                labels.forEach(btn => {
+                    btn.classList.add("disabled");
+                    btn.classList.remove("active");
+                });
+                const hdmiBasePath = "/Kitchen/smartTV";
+                database.ref(hdmiBasePath + "/HDMI1").set("OFF");
+                database.ref(hdmiBasePath + "/HDMI2").set("OFF");
+                database.ref(hdmiBasePath + "/HDMI3").set("OFF");
+                database.ref(hdmiBasePath + "/HDMI4").set("OFF");
+            }
+        }
+        window.setTV = setTV;
+
+        function setFridge(state) {
+            var fridgeRef = database.ref().child("/Kitchen/fridge");
+            fridgeRef.set(state)
+
+            const fridgeLabel = document.querySelector('.fridge-label');
+            if (state === 'ON') {
+                fridgeLabel.textContent = 'active';
+            } else {
+                fridgeLabel.textContent = 'not active';
+            }
+        }
+        window.setFridge = setFridge;
+        function setCoffee(state) {
+            var coffeeRef = database.ref().child("/Kitchen/coffee");
+            coffeeRef.set(state)
+
+            const coffeeLabel = document.querySelector('.coffee-label');
+            if (state === 'ON') {
+                coffeeLabel.textContent = 'active';
+            } else {
+                coffeeLabel.textContent = 'not active';
+            }
+        }
+        window.setCoffee = setCoffee;
+        function setFan(state) {
+            var fanRef = database.ref().child("/Kitchen/fan/state");
+            fanRef.set(state)
+        }
+        window.setFan = setFan;
+
+        function setHDMI(port, state) {
+            const tvSwitch = document.querySelector('input[onclick^="setTV"]');
+            if(tvSwitch.checked) {
+                var hdmiRef = database.ref("/Kitchen/smartTV/HDMI" + port);
+                hdmiRef.set(state);
+            }
+        }
+        window.setHDMI1 = (state) => setHDMI(1, state);
+        window.setHDMI2 = (state) => setHDMI(2, state);
+        window.setHDMI3 = (state) => setHDMI(3, state);
+        window.setHDMI4 = (state) => setHDMI(4, state);
+
+        document.querySelectorAll('.HDMI-label').forEach(label => {
+            label.addEventListener("click", function () {
+                if (this.classList.contains("disabled")) return;
+
+                if (this.classList.contains("active")) {
+                    this.classList.remove("active");
+                    const num = this.id.split("-")[2];
+                    setHDMI(num, "OFF");
+                    return;
+                }
+
+                document.querySelectorAll('.HDMI-label').forEach(otherLabel => {
+                    const otherNum = otherLabel.id.split("-")[2];
+                    if (otherLabel === this) {
+                        otherLabel.classList.add("active");
+                        setHDMI(otherNum, "ON");
+                    } else {
+                        otherLabel.classList.remove("active");
+                        setHDMI(otherNum, "OFF");
+                    }
+                });
+            });
+        });
+
+        updatePercentLabel(main_light_slider.value, brightnessLabel);
+        main_light_slider.addEventListener('input', () => {
+            const mainLightSwitch = document.querySelector('input[onclick^="setMainlight"]');
+            if (mainLightSwitch.checked) {
+                const brightnessRef = database.ref().child("/Kitchen/main-light/brightness");
+                brightnessRef.set(main_light_slider.value);
+            } 
+            updatePercentLabel(main_light_slider.value, brightnessLabel);
+        });
+
+        updatePercentLabel(TV_slider.value, volume_Label);
+        TV_slider.addEventListener('input', () => {
+            const tvSwitch = document.querySelector('input[onclick^="setTV"]');
+            if (tvSwitch.checked) {
+                const volumeRef = database.ref().child("/Kitchen/smartTV/volume");
+                volumeRef.set(TV_slider.value);
+            }
+            updatePercentLabel(TV_slider.value, volume_Label);
+        });
+
+        updatePercentLabel(fan_slider.value, speed_Label);
+        fan_slider.addEventListener('input', () => {
+            const fanSwitch = document.querySelector('input[onclick^="setFan"]');
+            if (fanSwitch.checked) {
+                const speedRef = database.ref().child("/Kitchen/fan/speed");
+                speedRef.set(fan_slider.value);
+            }
+            updatePercentLabel(fan_slider.value, speed_Label);
+        });
+    </script>
+    <script>
+        const toggleBtn = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+      
+        toggleBtn.addEventListener('click', () => {
+          navMenu.classList.toggle('active');
+        });
+
+        function updatePercentLabel(value, text) {
+            let label = '';
+
+            if (value ==0){
+            label = 'off'
+            } else if (value < 35) {
+            label = 'low';
+            } else if (value <= 70) {
+            label = 'medium';
+            } else {
+            label = 'high';
+            }
+
+            text.textContent = `${label} ${value}%`;
+        }
+        function updateTempLabel(value, text) {
+            let label = '';
+
+            if (value < 20) {
+            label = 'low';
+            } else if (value <= 28) {
+            label = 'medium';
+            } else {
+            label = 'high';
+            }
+
+            text.textContent = `${label} ${value}°C`;
+        }
+        const main_light_slider = document.querySelector('.main-light-slider');
+        const brightnessLabel = document.querySelector('.brightness-label');
+        const TV_slider = document.querySelector('.TV-slider');
+        const volume_Label = document.querySelector('.volume-label');
+        const AC_slider = document.querySelector('.AC-slider');
+        const temp_Label = document.querySelector('.temp-label');
+        const fan_slider = document.querySelector('.fan-slider');
+        const speed_Label = document.querySelector('.speed-label');
+        
+        updatePercentLabel(main_light_slider.value, brightnessLabel);
+        main_light_slider.addEventListener('input', () => {
+            updatePercentLabel(main_light_slider.value, brightnessLabel);
+        });
+
+        updatePercentLabel(TV_slider.value, volume_Label);
+        TV_slider.addEventListener('input', () => {
+            updatePercentLabel(TV_slider.value, volume_Label);
+        });
+
+        updateTempLabel(AC_slider.value, temp_Label);
+        AC_slider.addEventListener('input', () => {
+            updateTempLabel(AC_slider.value, temp_Label);
+        });
+
+        updatePercentLabel(fan_slider.value, speed_Label);
+        fan_slider.addEventListener('input', () => {
+            updatePercentLabel(fan_slider.value, speed_Label);
+        });
+
+                /*update slider*/
+                function updateSliderBackground(slider) {
+        const value = slider.value;
+        const min = slider.min;
+        const max = slider.max;
+        const percent = ((value - min) / (max - min)) * 100;
+
+        slider.style.background = `linear-gradient(to right, #b74b4b ${percent}%, #efe5e5 ${percent}%)`;
+        }
+
+        main_light_slider.addEventListener('input', function () {
+        updateSliderBackground(this);
+        });
+        fan_slider.addEventListener('input', function () {
+        updateSliderBackground(this);
+        });
+        AC_slider.addEventListener('input', function () {
+        updateSliderBackground(this);
+        });
+        TV_slider.addEventListener('input', function () {
+        updateSliderBackground(this);
+        });        
+        updateSliderBackground(main_light_slider); // Cập nhật lúc đầu
+        updateSliderBackground(fan_slider);
+        updateSliderBackground(TV_slider);
+        updateSliderBackground(AC_slider);
+
+        /*const labels = document.querySelectorAll('.HDMI-label');
+        labels.forEach(label => {
+            label.addEventListener('click', () => {
+                // Xóa class 'active' khỏi tất cả các label
+                labels.forEach(l => l.classList.remove('active'));
+                
+                // Thêm class 'active' cho label được click
+                label.classList.add('active');
+
+                // Optional: bạn có thể thêm xử lý gì đó ở đây, ví dụ gửi thông tin về HDMI đang chọn
+                console.log(`Đã chọn: ${label.textContent}`);
+            });
+        });*/
+
+        // Lấy dữ liệu từ các phần tử có id tương ứng
+        function getSensorValues() {
+            return {
+                temperature: parseFloat(document.getElementById('temperature').innerText) || 0,
+                humidity: parseFloat(document.getElementById('humidity').innerText) || 0,
+                airQuality: parseFloat(document.getElementById('air_quality').innerText) || 0,
+                gas: parseFloat(document.getElementById('gas').innerText) || 0
+            };
+        }
+
+        function drawChart() {
+            const ctx = document.getElementById('roomChart').getContext('2d');
+            const values = getSensorValues();
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Temperature', 'Humidity', 'Air Quality', 'Gas'],
+                    datasets: [{
+                        label: 'Room Conditions',
+                        data: [values.temperature, values.humidity, values.airQuality, values.gas],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(255, 206, 86, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(255, 206, 86, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Gọi hàm sau khi dữ liệu đã được cập nhật lên trang
+        setTimeout(drawChart, 500); // đợi 0.5s để dữ liệu được render trước
+    </script>
+</body>
+</html>

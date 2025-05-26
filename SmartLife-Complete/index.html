@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Smart Home Website</title>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo"><i class="fa-solid fa-seedling"></i> Smart life</a>
+
+        <!-- Nút menu toggle -->
+        <div class="menu-toggle" id="menu-toggle">
+            <i class="fa-solid fa-bars"></i> <!-- icon ☰ -->
+        </div>
+        <nav id="nav-menu">
+            <a href="index.html" class="active"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="living_room_page.html"><i class="fa-solid fa-couch"></i> Living Room</a>
+            <a href="bed_room_page.html" ><i class="fa-solid fa-moon"></i> Bedroom</a>
+            <a href="kitchen_page.html" ><i class="fa-solid fa-utensils"></i> Kitchen</a>
+            <a href="contact_page.html" ><i class="fa-solid fa-address-book"></i> Contact</a>
+        </nav>
+    </header>
+    <section class="home">
+        <div class="home-img">
+            <img src="living_room.jpg" alt="">
+        </div>
+        <div class="home-content">
+            <h1>Hi, welcome <span>Home</span></h1>
+            <h3 class="typing-text">I'm <span></span></h3>
+            <p>Integrate AI technology into your home in a way that feels natural and unobtrusive, allowing it to blend effortlessly into your daily routines. By doing so, you can enhance your comfort, security, and convenience.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com/Minh9072"><i class="fa-brands fa-github"></i></a>
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/minhtruong439/"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <a href="https://chatgpt.com/" class="btn">Chat with me</a>
+        </div>
+    </section>
+    <div class="card">
+        <div id="mode-card" class="mode-card">
+            <div class="mode-header">
+                <i class="fas fa-eye"></i>
+                <h2>Movie Night</h2>
+                <p class="active-label">Active</p> 
+            </div>
+            <p>Dim lights, turn on TV, and set ideal temperature for movie watching </p>
+        </div>
+        <div id="mode-card" class="mode-card">
+            <div class="mode-header">
+                <i class="fas fa-mug-saucer"></i>
+                <h2>Good Morning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
+                <p class="active-label">Active</p> 
+            </div>
+            <p>Gradually open blinds, start coffee maker, and adjust temperature</p>
+        </div>
+        <div id="mode-card" class="mode-card">
+            <div class="mode-header">
+                <i class="fas fa-shield-halved"></i>
+                <h2>Away Mode</h2>
+                <p class="active-label">Active</p> 
+            </div>
+            <p>Secure home and save energy while you're out</p>
+        </div>
+        <div id="mode-card" class="mode-card">
+            <div class="mode-header">
+                <i class="fas fa-table"></i>
+                <h2>Ventilation Mode</h2>
+                <p class="active-label">Active</p> 
+            </div>
+            <p>Open all windows to allow for proper ventilation and the circulation of fresh air</p>
+        </div>
+    </div>
+    
+    <script>
+        const toggleBtn = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+      
+        toggleBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        const cards = document.querySelectorAll('.mode-card');
+        cards.forEach(card => {
+        card.addEventListener('click', () => {
+            card.classList.toggle('active');
+        });
+        });
+    </script>
+</body>
+</html>

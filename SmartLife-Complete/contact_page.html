@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Smart Home Website</title>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo"><i class="fa-solid fa-seedling"></i> Smart life</a>
+
+        <!-- Nút menu toggle -->
+        <div class="menu-toggle" id="menu-toggle">
+            <i class="fa-solid fa-bars"></i> <!-- icon ☰ -->
+        </div>
+        <nav id="nav-menu">
+            <a href="index.html" ><i class="fa-solid fa-house"></i> Home</a>
+            <a href="living_room_page.html"><i class="fa-solid fa-couch"></i> Living Room</a>
+            <a href="bed_room_page.html" ><i class="fa-solid fa-moon"></i> Bedroom</a>
+            <a href="kitchen_page.html" ><i class="fa-solid fa-utensils"></i> Kitchen</a>
+            <a href="contact_page.html" class="active" ><i class="fa-solid fa-address-book"></i> Contact</a>
+        </nav>
+    </header>
+    <section class="home">
+        <div class="home-img">
+            <img src="member.jpg" alt="">
+        </div>
+        <div class="home-content">
+            <h1>Designed and Developed by <span>A Group</span></h1>
+            <h3>Contact: <span></span></h3>
+            <p>Truong Ngoc Minh · truongngocminhvt2004@gmail.com</p>
+            <p>Pham Do Quoc Binh · binhbobinhduong@gmail.com</p>
+            <p>Pham Gia Bao · baokate9@gmail.com</p>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <a href="https://chatgpt.com/" class="btn">Chat with me</a>
+        </div>
+    </section>
+    <script>
+        const toggleBtn = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+      
+        toggleBtn.addEventListener('click', () => {
+          navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

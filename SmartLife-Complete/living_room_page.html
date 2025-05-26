@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_room.css">
+    <title>Smart Home Website</title>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo"><i class="fa-solid fa-seedling"></i> Smart life</a>
+
+        <!-- Nút menu toggle -->
+        <div class="menu-toggle" id="menu-toggle">
+            <i class="fa-solid fa-bars"></i> <!-- icon ☰ -->
+        </div>
+        <nav id="nav-menu">
+            <a href="index.html" ><i class="fa-solid fa-house"></i> Home</a>
+            <a href="living_room_page.html" class="active"><i class="fa-solid fa-couch"></i> Living Room</a>
+            <a href="bed_room_page.html" ><i class="fa-solid fa-moon"></i> Bedroom</a>
+            <a href="kitchen_page.html" ><i class="fa-solid fa-utensils"></i> Kitchen</a>
+            <a href="contact_page.html" ><i class="fa-solid fa-address-book"></i> Contact</a>
+        </nav>
+    </header>
+    <section class="room-container">
+        <div>
+            <h1>Living Room</h1>
+            <p class="room-description">Main living area with sofa and entertainment center</p>
+            
+            <div class="room-grid">
+                <!-- Cột bên trái -->
+                <div class="left-column">
+                    <!-- Room Conditions Card -->
+                    <div class="room-card">
+                        <h2>Room Conditions</h2>
+                        <div class="condition-item">
+                            <i class="fas fa-temperature-high"></i>
+                            <span>Temperature</span>
+                            <span class="value" id = "temperature"></span>
+                        </div>
+                        <div class="condition-item">
+                            <i class="fas fa-droplet"></i>
+                            <span>&nbsp;Humidity</span>
+                            <span class="value" id = "humidity"></span>
+                        </div>
+                        <div class="condition-item">
+                            <i class="fas fa-wind"></i>
+                            <span>Air quality</span>
+                            <span class="value" id = "air_quality"></span>
+                        </div>
+                        <div class="condition-item">
+                            <i class="fas fa-fire"></i>
+                            <span>Gas</span>
+                            <span class="value" id = "gas"></span>
+                        </div>
+                    </div>
+                    <!-- Bar Chart -->
+                    <div class="room-card">
+                        <canvas id="roomConditionsChart"></canvas>
+                    </div>
+                </div>
+            
+                <!-- Cột bên phải -->
+                <div class="right-column">
+                    <!-- Main Light Card -->
+                    <div class="room-card">
+                        <div class="device-header">
+                            <i class="fas fa-lightbulb"></i>
+                            <h2>Main Light</h2>
+                            <label class="switch">
+                                <input type="checkbox" onclick="setMainlight(this.checked ? 'ON' : 'OFF')">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <input type="range" min="0" max="100" value="50" class="main-light-slider">  
+                        <div class="main-light-controls">
+                            <p>Brightness: </p>
+                            <p class="brightness-label">medium</p> 
+                        </div>
+                    </div>
+            
+                    <!-- Smart TV Card -->
+                    <div class="room-card">
+                        <div class="device-header">
+                            <i class="fas fa-tv"></i>
+                            <h2>Smart TV</h2>
+                            <label class="switch">
+                                <input type="checkbox" onclick="setTV(this.checked ? 'ON' : 'OFF')">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <input type="range" min="0" max="100" value="50" class="TV-slider">  
+                        <div class="TV-controls">
+                            <p>Volume: </p>
+                            <p class="volume-label">medium</p>           
+                        </div>
+                        <div class="HDMI-controls">
+                            <p>Input: </p>
+                            <p id= "HDMI-label-1" class="HDMI-label">HDMI 1</p>
+                            <p id= "HDMI-label-2" class="HDMI-label">HDMI 2</p>
+                            <p id= "HDMI-label-3" class="HDMI-label">HDMI 3</p>
+                            <p id= "HDMI-label-4" class="HDMI-label">HDMI 4</p>
+                        </div>
+                    </div>
+            
+                    <!-- Air Conditioner Card -->
+                    <div class="room-card">
+                        <div class="device-header">
+                            <i class="fas fa-snowflake"></i>
+                            <h2>Air Conditioner</h2>
+                            <label class="switch">
+                                <input type="checkbox" onclick="setAir(this.checked ? 'ON' : 'OFF')">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <input type="range" min="16" max="31" value="22" class="AC-slider"> 
+                        <div class="AC-controls">
+                            <p>Temperature: </p>
+                            <p class="temp-label">medium</p>        
+                        </div>
+                    </div>
+            
+                    <!-- Ceiling Fan Card -->
+                    <div class="room-card">
+                        <div class="device-header">
+                            <i class="fas fa-fan"></i>
+                            <h2>Ceiling Fan</h2>
+                            <label class="switch">
+                                <input type="checkbox" onclick="setFan(this.checked ? 'ON' : 'OFF')">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div><input type="range" min="0" max="100" value="50" class="fan-slider"></div>
+                        <div class="fan-controls">
+                            <p>Fan Speed: </p>
+                            <p class="speed-label">medium</p>                                   
+                        </div>                      
+                    </div>
+                </div>
+                <div class="right-column">
+                <div class="room-card">
+                    <h2>Clock</h2>
+                    <div class="clock" id="clock">00:00:00</div>
+                </div>
+
+                <div class="login-container">
+                    <h2>Enter Information</h2>
+                    <form action="/xu-ly-dang-nhap" method="post">
+                      <input type="text" name="username" placeholder="First name:" required>
+                      <input type="text" name="username" placeholder="Last name:" required>
+                      <input type="submit" value="submit">
+                    </form>
+                </div>
+
+                <div class="login-container">
+                    <h2>coordinates</h2>
+                    <div class="coord">🧭 Latitude: 10°49′36″ N</div>
+                    <div class="coord">🧭 Longitude: 106°45′39″ E</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyDCJ4Ddcn8i-KkmJE0dY-MCcAw4h69PBkA",
+            authDomain: "baocao-21d86.firebaseapp.com",
+            databaseURL: "https://baocao-21d86-default-rtdb.firebaseio.com",
+            projectId: "baocao-21d86",
+            storageBucket: "baocao-21d86.firebasestorage.app",
+            messagingSenderId: "132287005549",
+            appId: "1:132287005549:web:3c9782b1b59164afe25064",
+            measurementId: "G-KL7N48FWPL"
+        };
+        firebase.initializeApp(firebaseConfig);
+        var database = firebase.database();
+        firebase.analytics();
+
+        function getValue(elementId) {
+            const value = document.getElementById(elementId).textContent;
+            // Remove units and convert to number if possible
+            const numericValue = parseFloat(value.replace(/[^0-9.]/g, ''));
+            return isNaN(numericValue) ? 0 : numericValue; // Default to 0 if not numeric
+        }
+
+        // Sample data (replace with dynamic values from spans)
+        const chartData = {
+            labels: ['Temperature', 'Humidity', 'Air Quality', 'Gas'],
+            datasets: [{
+                label: 'Room Conditions',
+                data: [
+                    getValue('temperature'), // e.g., 25
+                    getValue('humidity'),    // e.g., 60
+                    getValue('air_quality'), // e.g., 0 (if non-numeric, defaults to 0)
+                    getValue('gas')         // e.g., 0 (if non-numeric, defaults to 0)
+                ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        // Initialize Chart.js bar chart
+        const ctx = document.getElementById('roomConditionsChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: chartData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Value'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Conditions'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false // Hide legend since we have only one dataset
+                    }
+                }
+            }
+        });
+
+        var nhietDo = document.getElementById('temperature');
+        var doAm = document.getElementById('humidity');
+        var dbRef3 = document.getElementById('gas');
+        var dbRef4 = document.getElementById('air_quality');
+
+        var dbRef1 = firebase.database().ref().child('/Livingroom/temperature');
+        var dbRef2 = firebase.database().ref().child('/Livingroom/humidity');
+        var gasRef = firebase.database().ref().child('/Livingroom/gas');
+        var airQualityRef = firebase.database().ref().child('/Livingroom/air_quality');
+
+        dbRef1.on('value', snap => { 
+            nhietDo.innerText = snap.val()+"°C"; 
+            chartData.datasets[0].data[0] = parseFloat(snap.val()) || 0; 
+            myChart.update(); 
+        });
+        dbRef2.on('value', snap => { 
+            doAm.innerText = snap.val()+"%";
+            chartData.datasets[0].data[1] = parseFloat(snap.val()) || 0;
+            myChart.update();
+        });
+
+        gasRef.on('value', snap => {
+            let gasValue = snap.val(); 
+            if (gasValue < 50) {
+                dbRef3.innerText = 'SAFE'; 
+            } if (gasValue > 50) {
+                dbRef3.innerText = 'DANGER'; 
+            } if (gasValue == 50) {
+                dbRef3.innerText = 'WARNING';
+            }
+            chartData.datasets[0].data[3] = parseFloat(snap.val()) || 0;
+            myChart.update();
+        });
+
+        airQualityRef.on('value', snap => {
+            let doAmValue = snap.val(); 
+            if (doAmValue > 50) {
+                dbRef4.innerText = 'GOOD'; 
+            } if (doAmValue < 50) {
+                dbRef4.innerText = 'BAD'; 
+            } if (doAmValue == 50) {
+                dbRef4.innerText = 'MEDIUM';
+            }
+            chartData.datasets[0].data[2] = parseFloat(snap.val()) || 0;
+            myChart.update();
+        });
+
+        function setMainlight(state) {
+            var lightRef = database.ref().child("/Livingroom/main-light/state");
+            lightRef.set(state)
+        }
+        window.setMainlight = setMainlight;
+        function setTV(state) {
+            //let state = "OFF";
+            var tvRef = database.ref().child("/Livingroom/smartTV/state");
+            tvRef.set(state)
+
+            const labels = document.querySelectorAll('.HDMI-label');
+            if (state === "ON") {
+                labels.forEach(btn => {
+                    btn.classList.remove("disabled");
+                });
+            } else {
+                labels.forEach(btn => {
+                    btn.classList.add("disabled");
+                    btn.classList.remove("active");
+                });
+                const hdmiBasePath = "/Livingroom/smartTV";
+                database.ref(hdmiBasePath + "/HDMI1").set("OFF");
+                database.ref(hdmiBasePath + "/HDMI2").set("OFF");
+                database.ref(hdmiBasePath + "/HDMI3").set("OFF");
+                database.ref(hdmiBasePath + "/HDMI4").set("OFF");
+            }
+        }
+        window.setTV = setTV;
+        function setAir(state) {
+            var airRef = database.ref().child("/Livingroom/air-conditioner/state");
+            airRef.set(state)
+        }
+        window.setAir = setAir;
+        function setFan(state) {
+            var fanRef = database.ref().child("/Livingroom/fan/state");
+            fanRef.set(state)
+        }
+        window.setFan = setFan;
+        function setHDMI(port, state) {
+            const tvSwitch = document.querySelector('input[onclick^="setTV"]');
+            if(tvSwitch.checked) {
+                var hdmiRef = database.ref("/Livingroom/smartTV/HDMI" + port);
+                hdmiRef.set(state);
+            }
+        }
+        window.setHDMI1 = (state) => setHDMI(1, state);
+        window.setHDMI2 = (state) => setHDMI(2, state);
+        window.setHDMI3 = (state) => setHDMI(3, state);
+        window.setHDMI4 = (state) => setHDMI(4, state);
+
+        document.querySelectorAll('.HDMI-label').forEach(label => {
+            label.addEventListener("click", function () {
+                if (this.classList.contains("disabled")) return;
+
+                if (this.classList.contains("active")) {
+                    this.classList.remove("active");
+                    const num = this.id.split("-")[2];
+                    setHDMI(num, "OFF");
+                    return;
+                }
+
+                document.querySelectorAll('.HDMI-label').forEach(otherLabel => {
+                    const otherNum = otherLabel.id.split("-")[2];
+                    if (otherLabel === this) {
+                        otherLabel.classList.add("active");
+                        setHDMI(otherNum, "ON");
+                    } else {
+                        otherLabel.classList.remove("active");
+                        setHDMI(otherNum, "OFF");
+                    }
+                });
+            });
+        });
+
+        const brightnessRef = firebase.database().ref().child("/Livingroom/main-light/brightness");
+        brightnessRef.on('value', snap => {
+            const mainLightSwitch = document.querySelector('input[onclick^="setMainlight"]');
+            if (mainLightSwitch.checked) {
+                const value = snap.val();
+                main_light_slider.value = value; // Cập nhật giá trị thanh trượt
+                updatePercentLabel(value, brightnessLabel); // Cập nhật nhãn
+                updateSliderBackground(main_light_slider); // Cập nhật giao diện thanh trượt
+            }
+        });
+
+        const TVRef = firebase.database().ref().child("/Livingroom/smartTV/volume");
+        TVRef.on('value', snap => {
+            const tvSwitch = document.querySelector('input[onclick^="setTV"]');
+            if (tvSwitch.checked) {
+                const value = snap.val();
+                TV_slider.value = value; // Cập nhật giá trị thanh trượt
+                updatePercentLabel(value, volume_Label); // Cập nhật nhãn
+                updateSliderBackground(TV_slider); // Cập nhật giao diện thanh trượt
+            }
+        });
+
+        const AirRef = firebase.database().ref().child("/Livingroom/air-conditioner/temp");
+        AirRef.on('value', snap => {
+            const airSwitch = document.querySelector('input[onclick^="setAir"]');
+            if (airSwitch.checked) {
+                const value = snap.val();
+                AC_slider.value = value; // Cập nhật giá trị thanh trượt
+                updatePercentLabel(value, temp_Label); // Cập nhật nhãn
+                updateSliderBackground(AC_slider); // Cập nhật giao diện thanh trượt
+            }
+        });
+
+        const FanRef = firebase.database().ref().child("/Livingroom/fan/speed");
+        FanRef.on('value', snap => {
+            const fanSwitch = document.querySelector('input[onclick^="setFan"]');
+            if (fanSwitch.checked) {
+                const value = snap.val();
+                fan_slider.value = value; // Cập nhật giá trị thanh trượt
+                updatePercentLabel(value, speed_Label); // Cập nhật nhãn
+                updateSliderBackground(fan_slider); // Cập nhật giao diện thanh trượt
+            }
+        });        
+
+        updatePercentLabel(main_light_slider.value, brightnessLabel);
+        main_light_slider.addEventListener('input', () => {
+            const mainLightSwitch = document.querySelector('input[onclick^="setMainlight"]');
+            if (mainLightSwitch.checked) {
+                const brightnessRef = database.ref().child("/Livingroom/main-light/brightness");
+                brightnessRef.set(main_light_slider.value);
+            } 
+            updatePercentLabel(main_light_slider.value, brightnessLabel); 
+        });
+
+        updatePercentLabel(TV_slider.value, volume_Label);
+        TV_slider.addEventListener('input', () => {
+            const tvSwitch = document.querySelector('input[onclick^="setTV"]');
+            if (tvSwitch.checked) {
+                const volumeRef = database.ref().child("/Livingroom/smartTV/volume");
+                volumeRef.set(TV_slider.value);
+            }
+            updatePercentLabel(TV_slider.value, volume_Label);
+        });
+
+        updateTempLabel(AC_slider.value, temp_Label);
+        AC_slider.addEventListener('input', () => {
+            const airSwitch = document.querySelector('input[onclick^="setAir"]');
+            if (airSwitch.checked) {
+                const tempRef = database.ref().child("/Livingroom/air-conditioner/temp");
+                tempRef.set(AC_slider.value);
+            }
+            updateTempLabel(AC_slider.value, temp_Label);
+        });
+
+        updatePercentLabel(fan_slider.value, speed_Label);
+        fan_slider.addEventListener('input', () => {
+            const fanSwitch = document.querySelector('input[onclick^="setFan"]');
+            if (fanSwitch.checked) {
+                const speedRef = database.ref().child("/Livingroom/fan/speed");
+                speedRef.set(fan_slider.value);
+            }
+            updatePercentLabel(fan_slider.value, speed_Label);
+        });
+        
+    </script>
+    <script>
+        const toggleBtn = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+      
+        toggleBtn.addEventListener('click', () => {
+          navMenu.classList.toggle('active');
+        });
+
+        function updatePercentLabel(value, text) {
+            let label = '';
+
+            if (value ==0){
+            label = 'off'
+            } else if (value < 35) {
+            label = 'low';
+            } else if (value <= 70) {
+            label = 'medium';
+            } else {
+            label = 'high';
+            }
+
+            text.textContent = `${label} ${value}%`;
+        }
+        function updateTempLabel(value, text) {
+            let label = '';
+
+            if (value < 20) {
+            label = 'low';
+            } else if (value <= 28) {
+            label = 'medium';
+            } else {
+            label = 'high';
+            }
+
+            text.textContent = `${label} ${value}°C`;
+        }
+        const main_light_slider = document.querySelector('.main-light-slider');
+        const brightnessLabel = document.querySelector('.brightness-label');
+        const TV_slider = document.querySelector('.TV-slider');
+        const volume_Label = document.querySelector('.volume-label');
+        const AC_slider = document.querySelector('.AC-slider');
+        const temp_Label = document.querySelector('.temp-label');
+        const fan_slider = document.querySelector('.fan-slider');
+        const speed_Label = document.querySelector('.speed-label');
+        
+        updatePercentLabel(main_light_slider.value, brightnessLabel);
+        main_light_slider.addEventListener('input', () => {
+            updatePercentLabel(main_light_slider.value, brightnessLabel);
+        });
+
+        updatePercentLabel(TV_slider.value, volume_Label);
+        TV_slider.addEventListener('input', () => {
+            updatePercentLabel(TV_slider.value, volume_Label);
+        });
+
+        updateTempLabel(AC_slider.value, temp_Label);
+        AC_slider.addEventListener('input', () => {
+            updateTempLabel(AC_slider.value, temp_Label);
+        });
+
+        updatePercentLabel(fan_slider.value, speed_Label);
+        fan_slider.addEventListener('input', () => {
+            updatePercentLabel(fan_slider.value, speed_Label);
+        });
+
+        /*update slider*/
+        function updateSliderBackground(slider) {
+        const value = slider.value;
+        const min = slider.min;
+        const max = slider.max;
+        const percent = ((value - min) / (max - min)) * 100;
+
+        slider.style.background = `linear-gradient(to right, #b74b4b ${percent}%, #efe5e5 ${percent}%)`;
+        }
+
+        main_light_slider.addEventListener('input', function () {
+        updateSliderBackground(this);
+        });
+        fan_slider.addEventListener('input', function () {
+        updateSliderBackground(this);
+        });
+        AC_slider.addEventListener('input', function () {
+        updateSliderBackground(this);
+        });
+        TV_slider.addEventListener('input', function () {
+        updateSliderBackground(this);
+        });        
+        updateSliderBackground(main_light_slider); // Cập nhật lúc đầu
+        updateSliderBackground(fan_slider);
+        updateSliderBackground(TV_slider);
+        updateSliderBackground(AC_slider);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const labels = document.querySelectorAll('.HDMI-label');
+            labels.forEach(label => {
+                label.classList.add("disabled");
+            });
+        });
+
+        /*const labels = document.querySelectorAll('.HDMI-label');
+        labels.forEach(label => {
+            label.addEventListener('click', () => {
+                // Xóa class 'active' khỏi tất cả các label
+                labels.forEach(l => l.classList.remove('active'));
+                
+                // Thêm class 'active' cho label được click
+                label.classList.add('active');
+
+                // Optional: bạn có thể thêm xử lý gì đó ở đây, ví dụ gửi thông tin về HDMI đang chọn
+                console.log(`Đã chọn: ${label.textContent}`);
+            });
+        });*/
+
+        function updateClock() {
+        const now = new Date();
+        let hours = now.getHours().toString().padStart(2, '0');
+        let minutes = now.getMinutes().toString().padStart(2, '0');
+        let seconds = now.getSeconds().toString().padStart(2, '0');
+        document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        setInterval(updateClock, 1000); // Cập nhật mỗi giây
+        updateClock(); // Gọi ngay khi tải trang
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,355 @@
+.room-container {
+    background-image: url('Azure_Samsung_Hero-1.webp');
+    background-size: cover;         /* giúp ảnh phủ kín màn hình */
+    background-repeat: no-repeat;   /* không lặp lại ảnh */
+    background-position: center;    /* căn giữa ảnh */
+    display: grid;
+    padding-top: 110px;
+    gap: 8rem;
+    background-color: #FFF8F8 ;
+    align-items: normal;
+}
+
+.room-container h1{
+    font-size: 45px;
+}
+
+.room-description {
+    color: solid black;
+    margin-bottom: 2rem;
+}
+
+.room-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.room-card {   
+    background-color: #FFFBFB4D;
+    backdrop-filter: blur(20px); /* tạo hiệu ứng mờ nền */
+    border: 1.7px solid #efe5e580;
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 1.5px 1px rgba(237, 218, 218, 0.1);
+    transition: 0.3s ease;
+}
+
+.room-card:hover{   
+    transform: scale(1.04);
+    border: 1.7px solid #b74b4b;
+    box-shadow: 0 0 12px #b74b4b;
+    padding: 1.5rem;
+    border-radius: 16px;
+}
+
+.left-column {
+    display: grid;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.right-column {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.condition-item {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+    gap: 1rem;
+}
+
+.condition-item i {
+    color: #666;
+    font-size: 1.2rem;
+}
+
+.value {
+    margin-left: auto;
+    font-weight: bold;
+}
+
+.device-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.device-header h2 {
+    margin: 0;
+    flex-grow: 1;
+}
+
+.device-header i {
+    font-size: 1.5rem;
+    color: #666;
+}
+
+/* Switch styling */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #efe5e5;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #b74b4b;
+    box-shadow: 0 0 8px #b74b4b;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Fan controls */
+.fan-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.fan-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 3px;
+    border-radius: 10px;
+    background: #efe5e5;
+    outline: none;
+    margin: 1rem 0;
+    accent-color: #b74b4b;
+}
+
+.fan-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 35px;
+    height: 20px;
+    background: #FFF8F8;
+    border: 2px solid #b74b4b;
+    border-radius: 10px;
+}
+.speed-label {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: #b74b4b;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    color: white;
+}
+.fan-controls p,
+.fan-controls .speed-label {
+    display: inline;
+}
+
+/* Main light control */
+.main-light-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.main-light-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 3px;
+    border-radius: 10px;
+    background: #efe5e5;
+    outline: none;
+    margin: 1rem 0;
+    accent-color: #b74b4b;
+}
+.main-light-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 35px;
+    height: 20px;
+    background: #FFF8F8;
+    border: 2px solid #b74b4b;
+    border-radius: 10px;
+}
+.main-light-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #4CAF50;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+  
+.brightness-label {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: #b74b4b;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    color: white;
+}
+.main-light-controls p,
+.main-light-controls .brightness-label {
+    display: inline;
+}
+
+/* AC control */
+.AC-controls {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.AC-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 3px;
+    border-radius: 10px;
+    background: #efe5e5;
+    outline: none;
+    margin: 1rem 0;
+    accent-color: #b74b4b;
+}
+
+.AC-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 35px;
+    height: 20px;
+    background: #FFF8F8;
+    border: 2px solid #b74b4b;
+    border-radius: 10px;
+}
+.temp-label {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: #b74b4b;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    color: white;
+}
+.AC-controls p,
+.AC-controls .temp-label {
+    display: inline;
+}
+
+/* TV control */
+.TV-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.TV-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 3px;
+    border-radius: 10px;
+    background: #efe5e5;
+    outline: none;
+    margin: 1rem 0;
+    accent-color: #b74b4b;
+}
+
+.TV-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 35px;
+    height: 20px;
+    background: #FFF8F8;
+    border: 2px solid #b74b4b;
+    border-radius: 10px;
+}
+.volume-label {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: #b74b4b;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    color: white;
+}
+.HDMI-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: left;
+    margin-top: 1.5rem;
+}
+.HDMI-label {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: #efd5d5;
+    border: 1.7px solid #efd5d5;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    color: white;
+    transition: 0.3s ease;
+}
+.HDMI-label.active{
+    background-color: #b74b4b;
+    color: white;
+    box-shadow: 0 0 12px #b74b4b;
+    border: 1.7px solid #b74b4b;
+}
+.HDMI-label:hover{   
+    border: 1.7px solid #b74b4b;
+    box-shadow: 0 0 12px #b74b4b;
+}
+.HDMI-label.disabled {
+    pointer-events: none;   
+    opacity: 1;     
+    cursor: not-allowed;
+}
+.HDMI-controls p,
+.HDMI-controls .HDMI-label {
+    display: inline;
+}
+.TV-controls p,
+.TV-controls .volume-label {
+    display: inline;
+}
